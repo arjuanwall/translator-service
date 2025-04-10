@@ -21,10 +21,11 @@ class TestTranslator(unittest.TestCase):
         self.assertEqual(translated_content, "The weather today is sunny and warm.")
         
         # Test with a longer, more complex response
-        complex_response = "Artificial intelligence has made significant progress in recent years. Natural language processing models can now understand and generate human-like text with remarkable accuracy."
+        complex_response = "人工智能在近年来取得了重大进展"
         is_english, translated_content = translate_content(complex_response)
-        self.assertTrue(is_english)
-        self.assertTrue(translated_content.startswith("人工智能在近年来取得了重大进展"))
+        self.assertFalse(is_english)
+        self.assertIn("significant progress", translated_content)
+        self.assertIn("Artificial intelligence", translated_content)
         
         # Test with response containing numbers and special characters
         mixed_response = "The temperature is 25°C, and there's a 30% chance of rain tomorrow."
@@ -65,7 +66,7 @@ class TestTranslator(unittest.TestCase):
         random_chars = "!@#$ %^&* ()_+ <>?:"
         is_english, translated_content = translate_content(random_chars)
         self.assertTrue(is_english)  # Should default to treating as English
-        self.assertNotEqual(translated_content, random_chars)
+        self.assertEqual(translated_content, random_chars)
         
         # Test with mixed gibberish containing some real words
         mixed_gibberish = "hello asdfghjkl world qwertyuiop"
