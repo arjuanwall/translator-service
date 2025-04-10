@@ -1,4 +1,5 @@
 import os
+import openai
 
 from flask import Flask
 from flask import request, jsonify
