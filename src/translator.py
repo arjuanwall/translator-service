@@ -48,7 +48,7 @@ def translate_content(content: str) -> tuple[bool, str]:
         )
 
         translation = response.choices[0].message.content.strip()
-        print(translation)
+        print("\n\nresponse = ", response, "\n\n")
 
         return translation
     
@@ -57,3 +57,5 @@ def translate_content(content: str) -> tuple[bool, str]:
     else:
         translation = get_translation(content)
         return False, translation
+
+print(translate_content("que triste mi hermano"))
