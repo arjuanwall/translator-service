@@ -52,7 +52,13 @@ def translate_content(content: str) -> tuple[bool, str]:
         return translation
     
     if get_language(content) == "English":
-        return True, content
+        return {
+            "is_english": True,
+            "translated_content": content
+        }
     else:
         translation = get_translation(content)
-        return False, translation
+        return {
+            "is_english": False,
+            "translated_content": translation
+        }
